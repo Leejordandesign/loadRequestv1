@@ -11,7 +11,7 @@
 <body class="h-full">
 
 <div class="min-h-full">
-    <nav class="bg-gray-800">
+    <nav class="bg-gray-800 sticky top-0 z-10">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-center">
                 <div class="flex items-center">
@@ -19,6 +19,7 @@
 {{--                        <img class="size-8" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">--}}
                         <img class="size-8" src="{{\Illuminate\Support\Facades\URL::asset('images/flower_flat_white.png')}}" alt="">
                     </div>
+
                 </div>
             </div>
         </div>

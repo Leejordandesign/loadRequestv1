@@ -1,5 +1,7 @@
 @extends('layouts.base')
-
+@section('pageTitle')
+    Products
+@endsection
 @section('content')
     <main class="pb-24 bg-white">
         <div class="px-4 py-16 text-center sm:px-6 lg:px-8">
@@ -346,7 +348,14 @@
                 @foreach($products as $product)
 
                     <div class="group relative border-r border-b border-gray-200 p-4 sm:p-6">
-                        <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-05-image-card-01.jpg" alt="TODO" class="aspect-square rounded-lg bg-gray-200 object-cover group-hover:opacity-75">
+{{--                        <img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-05-image-card-01.jpg" alt="TODO" class="aspect-square rounded-lg bg-gray-200 object-cover group-hover:opacity-75">--}}
+
+                        @if(File::exists(public_path('images/products/'.$product->item_number.'_00.default.png')))
+                            <img src="{{asset('images/products/'.$product->item_number.'_00.default.png')}}" alt="TODO" class="aspect-square rounded-lg bg-gray-100 object-cover group-hover:opacity-75">
+                        @else
+                            <img src="{{asset('images/branding/emblem_gray.svg')}}" alt="TODO" class="aspect-square rounded-lg bg-gray-100 object-cover  group-hover:opacity-75">
+                            <p class="text-center text-gray-400 italic">image coming soon</p>
+                        @endif
                         <div class="pt-10 pb-4 text-center">
                             <h3 class="text-sm font-medium text-gray-900">
                                 <a href="#">
@@ -676,4 +685,45 @@
             </div>
         </nav>
     </main>
+
+    <div x-data="{ open: true }" @keydown.window.escape="open = false" x-show="open" class="relative z-10" aria-labelledby="slide-over-title" x-ref="dialog" aria-modal="true">
+
+        <div x-show="open" x-transition:enter="ease-in-out duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in-out duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Background backdrop, show/hide based on slide-over state." class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+
+
+        <div class="fixed inset-0 overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+
+                    <div x-show="open" x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="pointer-events-auto relative w-screen max-w-md" x-description="Slide-over panel, show/hide based on slide-over state." @click.away="open = false">
+
+                        <div x-show="open" x-transition:enter="ease-in-out duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in-out duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Close button, show/hide based on slide-over state." class="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4">
+                            <button type="button" class="relative rounded-md text-gray-300 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden" @click="open = false">
+                                <span class="absolute -inset-2.5"></span>
+                                <span class="sr-only">Close panel</span>
+                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                            <div class="px-4 sm:px-6">
+                                <h2 class="text-base font-semibold text-gray-900" id="slide-over-title">Panel title</h2>
+                            </div>
+                            <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                                <!-- content here -->
+                                <div class="prose">
+                                    <span class="mhccolumn" data-item="801601"> <section class="columnscct-layout columnscct-text-align-left columnscct-extra-padding"> <div class="columnscct-columns-wrapper grid-xs-3 grid-3" data-view="NetSuite.ColumnsCCT.Column.View"> <div class="columnscct-column-container"> <div class="columnscct-img-container"></div> <h3 class="columnscct-column-caption mhc-benefits-header">Features and Benefits</h3> <div class="columnscct-text-container "> <ul class="mhc-benefits" data-item="801601"><li class="mhc-benefits-list">Sterile, Single use only</li><li class="mhc-benefits-list">Fits Most Luer Lock &amp; Luer Slip barrels</li><li class="mhc-benefits-list">Contains No Natural Rubber Latex</li><li class="mhc-benefits-list">Triple-Bevel Cut</li><li class="mhc-benefits-list">Bilingual Packaging</li></ul></div> </div> <div class="columnscct-column-container"> <div class="columnscct-img-container"></div> <h3 class="columnscct-column-caption mhc-addinfo-header">Additional Information</h3> <div class="columnscct-text-container "> <ul class="mhc-addinfo" data-item="801601"><li class="mhc-addinfo-title" style="list-style:none;">Color Coded Needle Hubs</li><li class="mhc-addinfo-bullet" style="list-style:none;">EasyTouch<sup>&reg;</sup> Hypodermic Needles utilize ISO standard colors on the needle hubs. This allows caregivers to quickly identify the gauge</li></ul></div> </div> <div class="columnscct-column-container"> <div class="columnscct-img-container"></div> <h3 class="columnscct-column-caption mhc-download-header">Available Downloads</h3> <div class="columnscct-text-container "> <h5 class="mhc-download-nodownload">No Downloads Available</h5> </div> </div> </div></section> </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection

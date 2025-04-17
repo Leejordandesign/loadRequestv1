@@ -4,7 +4,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $products = Product::where('item_number','=','807050')->get();
+    $products = Product::all();
     return view('productGrid',['products'=>$products]);
 });
 
